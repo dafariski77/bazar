@@ -22,6 +22,7 @@ export function AppText({
           fontSize: size,
           color,
         },
+        style,
       ]}
       {...props}
     />

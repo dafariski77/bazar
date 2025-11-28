@@ -47,7 +47,7 @@ export default function Index() {
         </AppText>
       </AppPressable>
 
-      <AppButton>Login</AppButton>
+      <AppButton onPress={() => router.push("/home")}>Login</AppButton>
 
       <View style={styles.authInfo}>
         <AppText color={colors.grayScale[500]} size={fontSize.lg}>

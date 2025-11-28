@@ -15,7 +15,12 @@ export default function RootLayout() {
           }}
           initialRouteName="(main)"
         >
-          <Stack.Screen name="index" />
+          <Stack.Screen
+            name="index"
+            options={{
+              headerShown: false,
+            }}
+          />
           <Stack.Screen
             name="(main)"
             options={{

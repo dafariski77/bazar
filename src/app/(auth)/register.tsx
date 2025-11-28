@@ -46,7 +46,7 @@ export default function Index() {
           </FormField>
         </View>
 
-        <AppButton>Register</AppButton>
+        <AppButton onPress={() => router.push("/home")}>Register</AppButton>
 
         <View style={styles.authInfo}>
           <AppText color={colors.grayScale[500]} size={fontSize.lg}>
