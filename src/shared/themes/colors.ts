@@ -26,5 +26,6 @@ export const colors = {
     "700": "#454545",
     "800": "#292929",
     "900": "#121212",
-  } as const
-} as const
+  } as const,
+  green: "#18A057",
+} as const;

@@ -44,7 +44,7 @@ const profileMenuItems = [
         color={colors.primary[500]}
       />
     ),
-    href: "",
+    href: "/order-history",
   },
   {
     title: "Help Center",

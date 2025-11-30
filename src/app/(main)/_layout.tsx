@@ -27,6 +27,12 @@ export default function MainLayout() {
           title: "Your Favorites",
         }}
       />
+      <Stack.Screen
+        name="order-history"
+        options={{
+          title: "Order History",
+        }}
+      />
     </Stack>
   );
 }
