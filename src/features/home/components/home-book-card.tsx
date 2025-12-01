@@ -3,9 +3,13 @@ import { colors, fontFamily, fontSize } from "@/shared/themes";
 import { Image } from "expo-image";
 import { StyleSheet } from "react-native";
 
-export function HomeBookCard() {
+interface HomeBookCardProps {
+  onPress?: VoidFunction;
+}
+
+export function HomeBookCard({ onPress }: HomeBookCardProps) {
   return (
-    <AppPressable style={styles.container}>
+    <AppPressable style={styles.container} onPress={onPress}>
       <Image
         source={{
           uri: "https://cdn.sanity.io/images/p34gzxcg/production/7635c996b98d1762e7530fe157b599284de70123-750x1050.jpg?auto=format&w=500&fit=scale",
