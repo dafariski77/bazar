@@ -22,6 +22,12 @@ export default function MainLayout() {
         }}
       />
       <Stack.Screen
+        name="vendors"
+        options={{
+          title: "Vendors",
+        }}
+      />
+      <Stack.Screen
         name="favorites"
         options={{
           title: "Your Favorites",

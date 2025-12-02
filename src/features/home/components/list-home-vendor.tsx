@@ -1,5 +1,6 @@
 import { AppText } from "@/shared/components/ui";
 import { colors, fontFamily, fontSize } from "@/shared/themes";
+import { Link } from "expo-router";
 import { FlatList, StyleSheet, View } from "react-native";
 import { HomeVendorCard } from "./home-vendor-card";
 
@@ -10,9 +11,11 @@ export function ListHomeVendor() {
         <AppText size={fontSize.h5} family={fontFamily.openSans.bold}>
           Best Vendors
         </AppText>
-        <AppText family={fontFamily.roboto.bold} color={colors.primary[500]}>
-          See all
-        </AppText>
+        <Link href={"/vendors"}>
+          <AppText family={fontFamily.roboto.bold} color={colors.primary[500]}>
+            See all
+          </AppText>
+        </Link>
       </View>
       <View style={styles.listContainer}>
         <FlatList
