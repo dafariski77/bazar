@@ -19,10 +19,10 @@ export const useAppHeader = ({
 
   useEffect(() => {
     navigation.setOptions({
-      title,
-      headerRight: rightIcon ? () => rightIcon : undefined,
-      headerLeft: leftIcon ? () => leftIcon : undefined,
-      headerStyle: style,
+      ...(title !== undefined && { title }),
+      ...(rightIcon && { headerRight: () => rightIcon }),
+      ...(leftIcon && { headerLeft: () => leftIcon }),
+      ...(style && { headerStyle: style }),
     });
   }, [navigation, rightIcon, leftIcon, style, title]);
 };
