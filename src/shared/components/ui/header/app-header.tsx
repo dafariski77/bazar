@@ -20,7 +20,7 @@ export function AppHeader({
         styles.container,
         options.headerStyle as ViewStyle,
         {
-          marginTop: top,
+          paddingTop: top + 10,
         },
       ]}
     >
