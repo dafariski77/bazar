@@ -1,6 +1,7 @@
 export const fontFamily = {
   openSans: {
     bold: "OpenSansBold",
+    regular: "OpenSansRegular",
   },
   roboto: {
     regular: "RobotoRegular",

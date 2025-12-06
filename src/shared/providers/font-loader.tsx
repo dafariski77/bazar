@@ -1,4 +1,7 @@
-import { OpenSans_700Bold } from "@expo-google-fonts/open-sans";
+import {
+  OpenSans_400Regular,
+  OpenSans_700Bold,
+} from "@expo-google-fonts/open-sans";
 import {
   Roboto_400Regular,
   Roboto_500Medium,
@@ -18,6 +21,7 @@ SplashScreen.preventAutoHideAsync();
 export function FontLoader({ children }: FontLoaderProps) {
   const [loaded, error] = useFonts({
     OpenSansBold: OpenSans_700Bold,
+    OpenSansRegular: OpenSans_400Regular,
     RobotoRegular: Roboto_400Regular,
     RobotoMedium: Roboto_500Medium,
     RobotoSemibold: Roboto_600SemiBold,
