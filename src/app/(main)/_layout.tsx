@@ -52,6 +52,13 @@ export default function MainLayout() {
         }}
       />
       <Stack.Screen name="help-center" />
+      <Stack.Screen
+        name="search"
+        options={{
+          presentation: "modal",
+          title: "Search",
+        }}
+      />
     </Stack>
   );
 }
