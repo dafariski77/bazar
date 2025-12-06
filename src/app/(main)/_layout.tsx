@@ -39,6 +39,18 @@ export default function MainLayout() {
           title: "Order History",
         }}
       />
+      <Stack.Screen
+        name="authors/index"
+        options={{
+          title: "Authors",
+        }}
+      />
+      <Stack.Screen
+        name="authors/[id]"
+        options={{
+          title: "Authors",
+        }}
+      />
     </Stack>
   );
 }
