@@ -20,8 +20,7 @@ export function DetailAuthorView() {
         renderItem={() => <CategoryBookCard onPress={openDetailSheet} />}
         ListHeaderComponent={<DetailAuthorHeader />}
         columnWrapperStyle={{
-          marginTop: 10,
-          gap: 10,
+          marginTop: 20,
           justifyContent: "space-between",
         }}
         showsVerticalScrollIndicator={false}
