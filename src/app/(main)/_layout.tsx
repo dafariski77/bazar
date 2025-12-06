@@ -51,6 +51,7 @@ export default function MainLayout() {
           title: "Authors",
         }}
       />
+      <Stack.Screen name="help-center" />
     </Stack>
   );
 }

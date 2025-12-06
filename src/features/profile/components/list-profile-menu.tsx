@@ -55,7 +55,7 @@ const profileMenuItems = [
         color={colors.primary[500]}
       />
     ),
-    href: "",
+    href: "/help-center",
   },
 ];
 

@@ -28,6 +28,8 @@ export default function TabsLayout() {
         animation: "shift",
       }}
       initialRouteName="home"
+      detachInactiveScreens={true}
+      backBehavior="history"
     >
       <Tabs.Screen
         name="home"
