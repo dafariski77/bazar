@@ -1,3 +1,6 @@
+import { useLogin } from "@/features/auth/hooks";
+import { loginSchema } from "@/features/auth/schemas";
+import { LoginSchemaType } from "@/features/auth/types";
 import {
   AppButton,
   AppPasswordInput,
@@ -8,11 +11,33 @@ import {
   ScreenWrapper,
 } from "@/shared/components/ui";
 import { colors, fontFamily, fontSize } from "@/shared/themes";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "expo-router";
+import { Controller, useForm } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
 
 export default function Index() {
   const router = useRouter();
+  const form = useForm<LoginSchemaType>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const { isPending, mutate } = useLogin();
+
+  const handleSubmit = (data: LoginSchemaType) => {
+    console.log("data", data);
+    mutate(data, {
+      onSuccess: (response) => {
+        console.log("success", response);
+      },
+      onError: (error) => {
+        console.log("error", error);
+      },
+    });
+  };
 
   return (
     <ScreenWrapper>
@@ -25,15 +50,37 @@ export default function Index() {
           family={fontFamily.roboto.regular}
           color={colors.grayScale[500]}
         >
-          Sign to your account
+          Sign to your accounts
         </AppText>
       </View>
       <View style={styles.formContainer}>
         <FormField label="Email">
-          <AppTextInput placeholder="Your Email" />
+          <Controller
+            control={form.control}
+            name="email"
+            render={({ field: { value, onChange } }) => (
+              <AppTextInput
+                placeholder="Your Email"
+                value={value}
+                onChangeText={onChange}
+                autoCapitalize={"none"}
+                textContentType="emailAddress"
+              />
+            )}
+          />
         </FormField>
         <FormField label="Password">
-          <AppPasswordInput placeholder="Your Password" />
+          <Controller
+            control={form.control}
+            name="password"
+            render={({ field: { value, onChange } }) => (
+              <AppPasswordInput
+                placeholder="Your Password"
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
+          />
         </FormField>
       </View>
 
@@ -47,7 +94,9 @@ export default function Index() {
         </AppText>
       </AppPressable>
 
-      <AppButton onPress={() => router.push("/home")}>Login</AppButton>
+      <AppButton onPress={form.handleSubmit(handleSubmit)} disabled={isPending}>
+        Login
+      </AppButton>
 
       <View style={styles.authInfo}>
         <AppText color={colors.grayScale[500]} size={fontSize.lg}>
