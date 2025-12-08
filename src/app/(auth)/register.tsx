@@ -1,3 +1,6 @@
+import { useRegister } from "@/features/auth/hooks";
+import { registerSchema } from "@/features/auth/schemas";
+import { RegisterSchemaType } from "@/features/auth/types";
 import {
   AppButton,
   AppPasswordInput,
@@ -8,11 +11,35 @@ import {
   ScreenWrapper,
 } from "@/shared/components/ui";
 import { colors, fontFamily, fontSize } from "@/shared/themes";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "expo-router";
+import { Controller, useForm } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
 
 export default function Index() {
   const router = useRouter();
+  const form = useForm({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
+  const { isPending, mutate } = useRegister();
+
+  const handleSubmit = (data: RegisterSchemaType) => {
+    console.log("irenf", data);
+
+    mutate(data, {
+      onSuccess: (response) => {
+        console.log("success", response);
+      },
+      onError: (error) => {
+        console.log("error", error);
+      },
+    });
+  };
 
   return (
     <ScreenWrapper>
@@ -36,17 +63,55 @@ export default function Index() {
         </View>
         <View style={styles.formContainer}>
           <FormField label="Name">
-            <AppTextInput placeholder="Your Name" />
+            <Controller
+              control={form.control}
+              name="name"
+              render={({ field: { value, onChange } }) => (
+                <AppTextInput
+                  placeholder="Your Name"
+                  value={value}
+                  onChangeText={onChange}
+                  autoCapitalize={"none"}
+                />
+              )}
+            />
           </FormField>
           <FormField label="Email">
-            <AppTextInput placeholder="Your Email" />
+            <Controller
+              control={form.control}
+              name="email"
+              render={({ field: { value, onChange } }) => (
+                <AppTextInput
+                  placeholder="Your Email"
+                  value={value}
+                  onChangeText={onChange}
+                  autoCapitalize={"none"}
+                  textContentType="emailAddress"
+                />
+              )}
+            />
           </FormField>
           <FormField label="Password">
-            <AppPasswordInput placeholder="Your Password" />
+            <Controller
+              control={form.control}
+              name="password"
+              render={({ field: { value, onChange } }) => (
+                <AppPasswordInput
+                  placeholder="Your Password"
+                  value={value}
+                  onChangeText={onChange}
+                />
+              )}
+            />
           </FormField>
         </View>
 
-        <AppButton onPress={() => router.push("/home")}>Register</AppButton>
+        <AppButton
+          onPress={form.handleSubmit(handleSubmit)}
+          disabled={isPending}
+        >
+          Register
+        </AppButton>
 
         <View style={styles.authInfo}>
           <AppText color={colors.grayScale[500]} size={fontSize.lg}>
@@ -59,6 +124,8 @@ export default function Index() {
           </AppPressable>
         </View>
       </View>
+      <AppText>{JSON.stringify(form.formState.errors)}</AppText>
+      <AppText>{JSON.stringify(form.getValues("email"))}</AppText>
       <View style={styles.termsInfo}>
         <AppText color={colors.grayScale[500]}>
           By clicking Register, you agree to our
