@@ -11,6 +11,7 @@ export const signInWithEmail = async (body: LoginSchemaType) => {
 
   return data;
 };
+
 export const signUpWithEmail = async (body: RegisterSchemaType) => {
   const { data, error } = await supabase.auth.signUp({
     ...body,
@@ -24,4 +25,12 @@ export const signUpWithEmail = async (body: RegisterSchemaType) => {
   if (error) throw new Error(error.message);
 
   return data;
+};
+
+export const logOutUser = async () => {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) throw new Error(error.message);
+
+  return;
 };

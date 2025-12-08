@@ -1,9 +1,25 @@
+import { useAuth, useLogout } from "@/features/auth/hooks";
 import { AppPressable, AppText } from "@/shared/components/ui";
 import { colors, fontFamily, fontSize } from "@/shared/themes";
 import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
 
 export function ProfileInfoMenu() {
+  const { session } = useAuth();
+  const { mutate, isPending } = useLogout();
+
+  // TODO: ADD BACKDROP LOADER WHEN LOGOUT
+
+  const handleLogout = () => {
+    console.log("logout");
+
+    mutate(undefined, {
+      onError: (error) => {
+        console.log("error", error);
+      },
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -16,18 +32,18 @@ export function ProfileInfoMenu() {
           />
           <View style={styles.userInfo}>
             <AppText family={fontFamily.openSans.bold} size={fontSize.h6}>
-              John Doe
+              {session?.user.user_metadata.fullname}
             </AppText>
             <AppText
               family={fontFamily.roboto.regular}
               size={fontSize.md}
               color={colors.grayScale[500]}
             >
-              +6285413526182
+              {session?.user.email}
             </AppText>
           </View>
         </View>
-        <AppPressable>
+        <AppPressable onPress={handleLogout}>
           <AppText family={fontFamily.roboto.bold} color={colors.red}>
             Logout
           </AppText>
